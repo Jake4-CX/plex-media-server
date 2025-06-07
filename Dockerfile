@@ -19,7 +19,7 @@ ARG LLVM_VERSION=10
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-FROM spritsail/alpine:3.18 AS builder
+FROM spritsail/alpine:edge AS builder
 
 RUN apk add --no-cache \
   autoconf \
@@ -329,7 +329,7 @@ RUN apk add  xf86-video-amdgpu --no-cache --update-cache \
   && cp -a /usr/lib/libva*.so* "$OUTPUT/usr/lib" \
   && cp -a /usr/lib/libdrm*.so* "$OUTPUT/usr/lib" \
   && cp -a /usr/lib/libbsd*.so* "$OUTPUT/usr/lib" \
-  && cp -a /usr/lib/libxshmfence*.so* "$OUTPUT/usr/lib" \
+  && cp -a /usr/lib/libxshmfence*.so* "$OUTPUT/usr/lib" || echo "libxshmfence not found" \
   && cp -a /usr/lib/libkms*.so* "$OUTPUT/usr/lib" \
   && cp -a /usr/lib/libxcb*.so* "$OUTPUT/usr/lib" \
   && cp -a /usr/lib/libffi*.so* "$OUTPUT/usr/lib" \
